@@ -1,0 +1,23 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.lintTask.options": "--ignore-path .gitignore",
+  "git.branchProtection": ["master"],
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "prettier.ignorePath": ".gitignore",
+  "[javascript]": {
+    "editor.codeActionsOnSave": {
+      "source.sortImports": true,
+      "source.fixAll": true
+    }
+  },
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.sortImports": true,
+      "source.fixAll": true
+    }
+  }
+}

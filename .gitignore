@@ -1,0 +1,6 @@
+*-lock.json*
+*.lock
+*.log
+*.zip
+dist
+node_modules
