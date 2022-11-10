@@ -1,5 +1,4 @@
 [![Build status](https://img.shields.io/github/workflow/status/maxmilton/uppie-lowie/ci)](https://github.com/maxmilton/uppie-lowie/actions)
-[![Coverage status](https://img.shields.io/codeclimate/coverage/maxmilton/uppie-lowie)](https://codeclimate.com/github/maxmilton/uppie-lowie)
 [![Chrome Web Store version](https://img.shields.io/chrome-web-store/v/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.svg)](https://chrome.google.com/webstore/detail/uppie-lowie/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
 [![Licence](https://img.shields.io/github/license/maxmilton/uppie-lowie.svg)](https://github.com/maxmilton/uppie-lowie/blob/master/LICENSE)
 
