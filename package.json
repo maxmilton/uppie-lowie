@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@types/chrome": "0.0.203",
-    "@types/node": "18.11.11",
+    "@types/node": "18.11.12",
     "@typescript-eslint/eslint-plugin": "5.46.0",
     "@typescript-eslint/parser": "5.46.0",
     "esbuild": "0.16.3",
