@@ -69,7 +69,6 @@ await esbuild.build({
   bundle: true,
   minify: !dev,
   sourcemap: dev,
-  watch: dev,
   write: dev,
   metafile: !dev && process.stdout.isTTY,
   logLevel: 'debug',
