@@ -1,48 +1,43 @@
 {
   "name": "uppie-lowie",
   "version": "1.0.0",
-  "description": "Fun times with text capitalisation browser extension",
+  "description": "Fun times with text capitalisation.",
   "repository": "maxmilton/uppie-lowie",
   "homepage": "https://github.com/maxmilton/uppie-lowie",
   "author": "Max Milton <max@happyhackers.xyz>",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "pnpm run prebuild && NODE_ENV=production node build.mjs",
-    "dev": "NODE_ENV=development node build.mjs",
-    "lint": "pnpm run lint:js && pnpm run lint:ts",
-    "lint:js": "eslint --ignore-path .gitignore --ext .ts,.js,.mjs,.cjs .",
+    "build": "NODE_ENV=production bun build.ts",
+    "dev": "NODE_ENV=development bun build.ts",
+    "lint": "bun run lint:js && bun run lint:ts",
+    "lint:js": "eslint --ignore-path .gitignore --ext .cjs,.js,.mjs,.ts .",
     "lint:ts": "tsc --noEmit",
-    "prebuild": "rm -rf dist; mkdir dist",
-    "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run build && cd dist && zip ../chrome-extension.zip *"
+    "prebuild": "rm -rf dist; mkdir dist"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.212",
-    "@types/node": "18.13.0",
-    "@typescript-eslint/eslint-plugin": "5.51.0",
-    "@typescript-eslint/parser": "5.51.0",
-    "esbuild": "0.17.6",
-    "esbuild-minify-templates": "0.10.0",
-    "esbuild-plugin-ekscss": "0.0.13",
-    "eslint": "8.33.0",
+    "@types/chrome": "0.0.241",
+    "@typescript-eslint/eslint-plugin": "6.1.0",
+    "@typescript-eslint/parser": "6.1.0",
+    "bun-types": "0.7.0",
+    "eslint": "8.45.0",
     "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-airbnb-typescript": "17.0.0",
+    "eslint-config-airbnb-typescript": "17.1.0",
+    "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-unicorn": "45.0.2",
-    "git-ref": "0.3.1",
-    "prettier": "2.8.4",
-    "prettier-plugin-pkg": "0.17.1",
-    "typescript": "4.9.5",
-    "uvu": "0.5.6"
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-unicorn": "48.0.0",
+    "prettier": "3.0.0",
+    "prettier-plugin-pkg": "0.18.0",
+    "typescript": "5.1.6"
   },
   "prettier": {
     "arrowParens": "always",
     "endOfLine": "lf",
     "singleQuote": true,
     "trailingComma": "all",
-    "printWidth": 100,
-    "pluginSearchDirs": [
-      "."
+    "plugins": [
+      "prettier-plugin-pkg"
     ]
   }
 }

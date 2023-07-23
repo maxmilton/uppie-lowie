@@ -1,20 +1,29 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 // https://developer.chrome.com/docs/extensions/mv3/manifest/
-// https://developer.chrome.com/docs/extensions/mv2/manifest/
 // https://developer.chrome.com/docs/extensions/reference/
-// https://developer.chrome.com/docs/extensions/mv3/devguide/
 
-import { gitRef } from 'git-ref';
 import pkg from './package.json' assert { type: 'json' };
 
-/** @type {chrome.runtime.Manifest} */
-export default {
+function gitRef() {
+  return Bun.spawnSync([
+    'git',
+    'describe',
+    '--always',
+    '--dirty=-dev',
+    '--broken',
+  ])
+    .stdout.toString()
+    .trim()
+    .replace(/^v/, '');
+}
+
+export const makeManifest = (): chrome.runtime.ManifestV3 => ({
   manifest_version: 3,
   name: 'Uppie Lowie',
-  description: 'Fun times with text capitalisation.',
+  description: pkg.description,
   version: pkg.version,
-  version_name: process.env.GITHUB_REF ? undefined : gitRef().replace(/^v/, ''),
+  // shippable releases should not have a named version
+  version_name: process.env.CI ? undefined : gitRef(),
+  homepage_url: pkg.homepage,
   action: {},
   permissions: [
     'activeTab', // https://developer.chrome.com/docs/extensions/mv3/manifest/activeTab/
@@ -27,4 +36,4 @@ export default {
 
   // https://chrome.google.com/webstore/detail/uppie-lowie/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   // key: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-};
+});

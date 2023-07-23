@@ -1,7 +1,10 @@
 export {};
 
 function mutatePageText() {
-  const treeWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const treeWalker = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT,
+  );
 
   while (treeWalker.nextNode()) {
     const node = treeWalker.currentNode;
@@ -9,16 +12,18 @@ function mutatePageText() {
 
     if (text) {
       node.nodeValue = [...text]
-        .map((char) => (Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()))
+        .map((char) =>
+          Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase(),
+        )
         .join('');
     }
   }
 }
 
 chrome.action.onClicked.addListener((tab) => {
-  if (!tab.url?.includes('chrome://')) {
+  if (tab.id && !tab.url?.includes('chrome://')) {
     void chrome.scripting.executeScript({
-      target: { tabId: tab.id! },
+      target: { tabId: tab.id },
       func: mutatePageText,
     });
   }
