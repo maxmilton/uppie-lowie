@@ -2,9 +2,9 @@
   "name": "uppie-lowie",
   "version": "1.0.1",
   "description": "Fun times with text capitalisation.",
-  "repository": "maxmilton/uppie-lowie",
+  "repository": "github:maxmilton/uppie-lowie",
   "homepage": "https://github.com/maxmilton/uppie-lowie",
-  "author": "Max Milton <max@happyhackers.xyz>",
+  "author": "Max Milton <max@2okki.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
