@@ -1,15 +1,17 @@
-name: ci
+name: audit
 on:
   push:
-    branches: [master]
-    paths-ignore: ["**.md"]
+    branches: [master, next]
+    paths: ["bun.lock", "package.json"]
   pull_request: {}
   workflow_dispatch: {}
+  schedule:
+    - cron: "28 6 * * 4"
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.head.label || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
-  lint:
+  audit:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -19,5 +21,4 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - run: bun install --frozen-lockfile
-      - run: bun run lint
+      - run: bun audit
