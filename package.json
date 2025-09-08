@@ -10,34 +10,20 @@
   "scripts": {
     "build": "NODE_ENV=production bun build.ts",
     "dev": "NODE_ENV=development bun build.ts",
-    "lint": "bun run lint:js && bun run lint:ts",
-    "lint:js": "eslint --ignore-path .gitignore --ext .cjs,.js,.mjs,.ts .",
-    "lint:ts": "tsc --noEmit",
-    "prebuild": "rm -rf dist; mkdir dist"
+    "lint": "bun lint:fmt && bun lint:js && bun lint:ts",
+    "lint:fmt": "biome check",
+    "lint:js": "eslint",
+    "lint:ts": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.246",
-    "@typescript-eslint/eslint-plugin": "6.7.3",
-    "@typescript-eslint/parser": "6.7.3",
-    "bun-types": "1.0.3",
-    "eslint": "8.50.0",
-    "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-airbnb-typescript": "17.1.0",
-    "eslint-config-prettier": "9.0.0",
-    "eslint-plugin-import": "2.28.1",
-    "eslint-plugin-prettier": "5.0.0",
-    "eslint-plugin-unicorn": "48.0.1",
-    "prettier": "3.0.3",
-    "prettier-plugin-pkg": "0.18.0",
-    "typescript": "5.2.2"
-  },
-  "prettier": {
-    "arrowParens": "always",
-    "endOfLine": "lf",
-    "singleQuote": true,
-    "trailingComma": "all",
-    "plugins": [
-      "prettier-plugin-pkg"
-    ]
+    "@biomejs/biome": "2.2.3",
+    "@eslint/js": "9.35.0",
+    "@maxmilton/eslint-config": "0.2.1",
+    "@types/bun": "1.2.21",
+    "@types/chrome": "0.1.6",
+    "eslint": "9.35.0",
+    "eslint-plugin-unicorn": "61.0.1",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.42.0"
   }
 }

@@ -1,12 +1,17 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
+    "moduleDetection": "force",
     "moduleResolution": "bundler",
     "esModuleInterop": false,
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
     "skipLibCheck": true,
-    "allowJs": false,
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
 
     "strict": true,
     "allowUnreachableCode": false,
@@ -14,16 +19,10 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": false, // covered by eslint
     "noImplicitOverride": true,
+    "noUncheckedSideEffectImports": true,
     "noUnusedLocals": false, // covered by eslint
     "noUnusedParameters": false, // covered by eslint
-    "verbatimModuleSyntax": true,
-
-    "types": [
-      "bun-types",
-      "chrome",
-      "./node_modules/typescript/lib/lib.esnext.full.d.ts" // workaround for bun-types breaking dom types
-    ]
+    "verbatimModuleSyntax": true
   },
-  "include": ["src", "test", "build.ts", "manifest.config.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["*.config.mjs", "*.config.ts", "build.ts", "src", "test"]
 }
