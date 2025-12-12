@@ -18,8 +18,8 @@ Report any bugs you encounter on the [GitHub issue tracker](https://github.com/m
 
 ## License
 
-MIT license. See [LICENSE](https://github.com/maxmilton/uppie-lowie/blob/master/LICENSE).
+MIT license. See [LICENSE](./LICENSE).
 
 ---
 
-© 2022 [Max Milton](https://maxmilton.com)
+© [Max Milton](https://maxmilton.com)
