@@ -3,17 +3,22 @@
   "version": "1.0.1",
   "description": "Fun times with text capitalisation.",
   "repository": "github:maxmilton/uppie-lowie",
+  "bugs": "https://github.com/maxmilton/uppie-lowie/issues",
   "homepage": "https://github.com/maxmilton/uppie-lowie",
   "author": "Max Milton <max@2okki.com>",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "NODE_ENV=production bun build.ts",
     "dev": "NODE_ENV=development bun build.ts",
     "lint": "bun lint:fmt && bun lint:js && bun lint:ts",
     "lint:fmt": "biome check",
     "lint:js": "eslint",
-    "lint:ts": "tsc --noEmit"
+    "lint:ts": "tsc --noEmit",
+    "test": "bun test --only-failures",
+    "test:ci": "bun test --coverage --randomize --rerun-each=3",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.3",
