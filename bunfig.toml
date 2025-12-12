@@ -1,0 +1,8 @@
+"$schema" = "https://www.schemastore.org/bunfig.json"
+
+[install]
+auto = "disable"
+
+[test]
+preload = ["./test/setup.ts"]
+root = "./test/unit"

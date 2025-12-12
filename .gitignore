@@ -1,6 +1,11 @@
+*.bak
 *-lock.json*
+*-lock.yaml
 *.lock
-*.log
 *.zip
-dist
-node_modules
+!/bun.lock
+/coverage/
+/dist/
+/node_modules/
+/playwright-report/
+/test-results/
