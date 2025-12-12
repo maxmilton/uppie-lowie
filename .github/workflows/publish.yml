@@ -1,26 +1,33 @@
 name: publish
+
 on:
   push:
-    tags: [v*.*.*]
+    tags:
+      - "v*.*.*"
+
 jobs:
   publish:
+    if: ${{ github.repository_owner == 'maxmilton' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: read
+      contents: write
       id-token: write
+      attestations: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: oven-sh/setup-bun@v1
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun run build
       - run: bun run lint
-      - run: cd dist && zip ../chrome-extension.zip *
-      - uses: maxmilton/action-create-release@v0
+      - run: bun run test
+      - run: zip -jv chrome-extension.zip dist/*
+      - uses: actions/attest-build-provenance@v3
         with:
-          files: |
-            chrome-extension.zip
-          git-tag: ${{ github.ref }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          subject-path: chrome-extension.zip
+      - run: gh release create "${{ github.ref_name }}" chrome-extension.zip --draft --generate-notes
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
