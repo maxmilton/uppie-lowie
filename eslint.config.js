@@ -24,6 +24,7 @@ export default defineConfig(
     rules: {
       "@typescript-eslint/no-misused-spread": "warn",
       "no-confusing-arrow": "warn",
+      "unicorn/consistent-boolean-name": "off",
     },
   },
   { ignores: ["dist"] },

@@ -1,6 +1,6 @@
-*.bak
 *-lock.json*
 *-lock.yaml
+*.bak
 *.lock
 *.zip
 !/bun.lock
