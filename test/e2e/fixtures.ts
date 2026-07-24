@@ -21,7 +21,7 @@ export const test = base.extend<{ context: BrowserContext; extensionId: string }
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     sw ??= await context.waitForEvent("serviceworker", { timeout: 200 });
 
-    const extensionId = sw.url().split("/")[2];
+    const extensionId = sw.url().split("/", 3)[2];
     await use(extensionId);
   },
 });
