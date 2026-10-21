@@ -4,7 +4,7 @@
     "dbaeumer.vscode-eslint",
     "oven.bun-vscode",
     "tekumara.typos-vscode",
-    "YoavBls.pretty-ts-errors"
+    "yoavbls.pretty-ts-errors"
   ],
   "unwantedRecommendations": ["dprint.dprint", "esbenp.prettier-vscode", "prettier.prettier-vscode"]
 }
