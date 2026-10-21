@@ -1,9 +1,10 @@
 import js from "@eslint/js";
 import mm from "@maxmilton/eslint-config";
-import { defineConfig } from "eslint/config";
+import { defineConfig, includeIgnoreFile } from "eslint/config";
 import unicorn from "eslint-plugin-unicorn";
 import ts from "typescript-eslint";
 
+// eslint-disable-next-line unicorn/no-top-level-side-effects
 export default defineConfig(
   js.configs.recommended,
   ts.configs.strictTypeChecked,
@@ -27,5 +28,7 @@ export default defineConfig(
       "unicorn/consistent-boolean-name": "off",
     },
   },
-  { ignores: ["dist"] },
+  includeIgnoreFile(new URL(".gitignore", import.meta.url).pathname, {
+    gitignoreResolution: true,
+  }),
 );
