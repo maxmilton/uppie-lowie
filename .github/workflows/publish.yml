@@ -5,29 +5,69 @@ on:
     tags:
       - "v*.*.*"
 
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+  queue: max
+
+permissions: {}
+
 jobs:
-  publish:
-    if: ${{ github.repository_owner == 'maxmilton' }}
+  build:
+    if: ${{ github.repository == 'maxmilton/uppie-lowie' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: write
-      id-token: write
-      attestations: write
+      contents: read
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Validate release
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          [[ "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-next\.(0|[1-9][0-9]*))?$ ]] || exit 1
+          [[ "$GITHUB_REF" == "refs/tags/$RELEASE_TAG" ]] || exit 1
+          [[ "$RELEASE_TAG" == "v$(jq -er '.version' package.json)" ]] || exit 1
+          [[ "$(jq -r '.name' package.json)" == "uppie-lowie" ]] || exit 1
+        shell: bash
+
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version-file: .bun-version
+          no-cache: true
       - run: bun install --frozen-lockfile
       - run: bun run build
       - run: bun run lint
       - run: bun run test
       - run: zip -jv chrome-extension.zip dist/*
+      - uses: actions/upload-artifact@v7
+        with:
+          name: chrome-extension
+          path: chrome-extension.zip
+          archive: false
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: chrome-extension
       - uses: actions/attest@v4
         with:
           subject-path: chrome-extension.zip
-      - run: gh release create "$GITHUB_REF_NAME" chrome-extension.zip --draft --generate-notes
+      - run: gh release create "$GITHUB_REF_NAME" chrome-extension.zip --draft --generate-notes --verify-tag
         shell: bash
         env:
+          GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
